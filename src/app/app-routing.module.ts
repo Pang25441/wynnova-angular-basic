@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from './guard/login.guard';
 import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { TodoFormComponent } from './todo/todo-form/todo-form.component';
@@ -9,7 +10,7 @@ import { TodoComponent } from './todo/todo.component';
 const routes: Routes = [
   {path: '', component: HelloWorldComponent},
   {path: 'login', component: LoginFormComponent},
-  {path: 'todo', component: TodoComponent, children: [
+  {path: 'todo', component: TodoComponent, canActivate: [LoginGuard], children: [
     {path: 'list', component: TodoListComponent},
     {path: 'form', component:TodoFormComponent}
   ]}

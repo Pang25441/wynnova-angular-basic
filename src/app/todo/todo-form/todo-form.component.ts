@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-todo-form',
@@ -20,7 +21,7 @@ export class TodoFormComponent implements OnInit {
   isLoggedIn: boolean = false
   loginNanme: string = ''
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     // this.name = ''
     // this.title = ''
     // this.date = ''
@@ -30,14 +31,9 @@ export class TodoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let isLogin = localStorage.getItem('isLogin')
-    if(isLogin == '1') {
-      this.isLoggedIn = true
-      this.loginNanme = localStorage.getItem('name') || ''
-      this.todo.name = this.loginNanme
-    } else {
-      this.isLoggedIn = false
-    }
+    this.isLoggedIn = this.userService.isLoggedIn
+    this.loginNanme = this.userService.getName()
+    this.todo.name = this.loginNanme
   }
 
   onSaveTodo() {

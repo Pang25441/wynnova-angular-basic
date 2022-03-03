@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -12,36 +13,25 @@ export class LoginFormComponent implements OnInit {
 
   isLoggedIn: boolean = false
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    let isLogin = localStorage.getItem('isLogin')
-    if(isLogin == '1') {
-      this.isLoggedIn = true
-    } else {
-      this.isLoggedIn = false
-    }
+    this.isLoggedIn = this.userService.isLoggedIn
   }
 
   onLogin() {
-    // console.log(this.username, this.password)
-    if(this.username.trim().length > 0 && this.password.trim().length > 0) {
-
-      localStorage.setItem('isLogin', '1')
-      localStorage.setItem('name', this.username)
-      this.isLoggedIn = true
-
+    if(this.userService.login(this.username, this.password)) {
+      this.isLoggedIn = this.userService.isLoggedIn
       alert('Logged in')
-
     } else {
+      this.isLoggedIn = this.userService.isLoggedIn
       alert("Please input username/password")
     }
   }
 
   onLogout() {
-    // localStorage.clear()
-    localStorage.removeItem('isLogin')
-    this.isLoggedIn = false
+    this.userService.logout()
+    this.isLoggedIn = this.userService.isLoggedIn
   }
 
 }

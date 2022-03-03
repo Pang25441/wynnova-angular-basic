@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../models/todo.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-todo',
@@ -14,7 +15,7 @@ export class TodoComponent implements OnInit {
 
   todoList: Todo[]
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     // this.todoListDummy = [
     //   {title: 'AAAAAAAAAAAAAA', name: 'GGGG', date:'2022-03-03'},
     //   {title: 'BBBBBBBBBBBBBB', name: 'GGGG', date:'2022-03-03'},
@@ -25,12 +26,13 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let isLogin = localStorage.getItem('isLogin')
-    if(isLogin == '1') {
-      this.isLoggedIn = true
-    } else {
-      this.isLoggedIn = false
-    }
+    this.isLoggedIn = this.userService.isLoggedIn
+
+    this.userService.loginStatusChanged.subscribe(
+      (status) => {
+        this.isLoggedIn = status
+      }
+    )
 
     this.getTodoList()
   }

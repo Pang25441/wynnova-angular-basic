@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-todo-form',
@@ -39,7 +40,7 @@ export class TodoFormComponent implements OnInit {
   onSaveTodo() {
     // console.log(this.todo)
 
-    this.http.post("http://localhost:8000/api/todo", this.todo).subscribe(
+    this.http.post(environment.endpoint + "todo", this.todo).subscribe(
       (response: any) => {
         console.log(response)
         this.onSave.emit(response.data)

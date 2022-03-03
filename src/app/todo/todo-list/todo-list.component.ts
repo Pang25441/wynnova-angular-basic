@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-todo-list',
@@ -23,7 +24,7 @@ export class TodoListComponent implements OnInit {
     if(!confirm("Are you sure?")) {
       return
     }
-    this.http.delete("http://localhost:8000/api/todo/"+id).subscribe(
+    this.http.delete(environment.endpoint + "todo/"+id).subscribe(
       (response: any) => {
         if(response.status == '200') {
           alert('Success')

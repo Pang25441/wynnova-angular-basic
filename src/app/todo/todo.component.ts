@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Todo } from '../models/todo.model';
 import { UserService } from '../services/user.service';
 
@@ -38,7 +39,7 @@ export class TodoComponent implements OnInit {
   }
 
   getTodoList() {
-    this.http.get("http://localhost:8000/api/todo").subscribe(
+    this.http.get(environment.endpoint + "todo").subscribe(
       (response: any) => {
         if(response.status == '200') {
           this.todoList = response.data

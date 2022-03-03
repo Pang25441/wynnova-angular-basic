@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+
+  endpoint: 'http://dev.wynnovas.com/api/'
 };

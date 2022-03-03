@@ -3,6 +3,7 @@
 
     <h3>Todo Application</h3>
 
+    <!-- <router-outlet></router-outlet> -->
     <app-todo-form (onSave)="saveTodo($event)"></app-todo-form>
     <app-todo-list [todoList]="todoList" (onDeleted)="onTodoDeleted($event)"></app-todo-list>
 

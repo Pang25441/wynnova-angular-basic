@@ -10,6 +10,7 @@ import { TodoComponent } from './todo/todo.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoFormComponent } from './todo/todo-form/todo-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
     BrowserModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class LoginFormComponent implements OnInit {
 
   isLoggedIn: boolean = false
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.userService.isLoggedIn
@@ -23,6 +24,7 @@ export class LoginFormComponent implements OnInit {
     if(this.userService.login(this.username, this.password)) {
       this.isLoggedIn = this.userService.isLoggedIn
       alert('Logged in')
+      this.router.navigate(["/todo"])
     } else {
       this.isLoggedIn = this.userService.isLoggedIn
       alert("Please input username/password")

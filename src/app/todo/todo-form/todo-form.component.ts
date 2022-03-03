@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
 
@@ -19,7 +20,7 @@ export class TodoFormComponent implements OnInit {
   isLoggedIn: boolean = false
   loginNanme: string = ''
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // this.name = ''
     // this.title = ''
     // this.date = ''
@@ -42,7 +43,14 @@ export class TodoFormComponent implements OnInit {
   onSaveTodo() {
     // console.log(this.todo)
 
-    this.onSave.emit({...this.todo})
+    this.http.post("http://localhost:8000/api/todo", this.todo).subscribe(
+      (response: any) => {
+        console.log(response)
+        this.onSave.emit(response.data)
+      }
+    )
+
+
     this.onReset()
   }
 

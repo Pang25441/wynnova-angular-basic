@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
 
 @Component({
@@ -9,12 +10,29 @@ import { Todo } from 'src/app/models/todo.model';
 export class TodoListComponent implements OnInit {
 
   @Input() todoList: Todo[]
+  @Output() onDeleted: EventEmitter<any> = new EventEmitter()
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.todoList = []
   }
 
   ngOnInit(): void {
+  }
+
+  onDelete(id: number) {
+    if(!confirm("Are you sure?")) {
+      return
+    }
+    this.http.delete("http://localhost:8000/api/todo/"+id).subscribe(
+      (response: any) => {
+        if(response.status == '200') {
+          alert('Success')
+          this.onDeleted.emit(true)
+        } else {
+          alert('delete fail')
+        }
+      }
+    )
   }
 
 }

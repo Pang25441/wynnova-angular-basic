@@ -6,6 +6,8 @@
         <div class="ms-2 me-auto">
           <div class="fw-bold">{{todo.title}}</div>
           {{todo.name}}
+          <br>
+          <button (click)="onDelete(todo.id)" class="btn btn-danger">Delete</button>
         </div>
         <span class="badge bg-primary rounded-pill">{{todo.date}}</span>
       </li>

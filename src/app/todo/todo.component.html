@@ -4,7 +4,7 @@
     <h3>Todo Application</h3>
 
     <app-todo-form (onSave)="saveTodo($event)"></app-todo-form>
-    <app-todo-list [todoList]="todoListDummy"></app-todo-list>
+    <app-todo-list [todoList]="todoList" (onDeleted)="onTodoDeleted($event)"></app-todo-list>
 
   </div>
 </div>

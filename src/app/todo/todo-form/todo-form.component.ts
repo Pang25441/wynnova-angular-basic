@@ -16,6 +16,9 @@ export class TodoFormComponent implements OnInit {
 
   todo: Todo
 
+  isLoggedIn: boolean = false
+  loginNanme: string = ''
+
   constructor() {
     // this.name = ''
     // this.title = ''
@@ -26,12 +29,26 @@ export class TodoFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let isLogin = localStorage.getItem('isLogin')
+    if(isLogin == '1') {
+      this.isLoggedIn = true
+      this.loginNanme = localStorage.getItem('name') || ''
+      this.todo.name = this.loginNanme
+    } else {
+      this.isLoggedIn = false
+    }
   }
 
   onSaveTodo() {
     // console.log(this.todo)
 
     this.onSave.emit({...this.todo})
+    this.onReset()
+  }
+
+  onReset() {
+    this.todo = new Todo
+    this.todo.name = this.loginNanme
   }
 
 }

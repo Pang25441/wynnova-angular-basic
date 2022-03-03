@@ -1,0 +1,29 @@
+<div *ngIf="isLoggedIn == false" class="card">
+  <div class="card-header">
+    Login
+  </div>
+  <div class="card-body">
+
+    <div class="mt-4">
+      <label for="username" class="form-label">Username</label>
+      <input [(ngModel)]="username" type="text" name="username" id="username" class="form-control">
+    </div>
+
+    <div class="mt-4">
+      <label for="password" class="form-label">Password</label>
+      <input [(ngModel)]="password" type="password" name="password" id="password" class="form-control">
+    </div>
+
+    <div class="mt-4">
+      <button (click)="onLogin()" class="btn btn-primary">Login</button>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="isLoggedIn == true" class="card">
+  <div class="card-body">
+    <h3>You're Logged In</h3>
+    <button (click)="onLogout()" class="btn btn-danger">Logout</button>
+  </div>
+</div>

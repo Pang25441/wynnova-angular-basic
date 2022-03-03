@@ -9,6 +9,7 @@ import { Todo } from '../models/todo.model';
 export class TodoComponent implements OnInit {
 
   todoListDummy: any[]
+  isLoggedIn: boolean = false
 
   constructor() {
     this.todoListDummy = [
@@ -19,6 +20,12 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let isLogin = localStorage.getItem('isLogin')
+    if(isLogin == '1') {
+      this.isLoggedIn = true
+    } else {
+      this.isLoggedIn = false
+    }
   }
 
   saveTodo(todoData: Todo) {

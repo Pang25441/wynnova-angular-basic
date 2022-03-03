@@ -8,6 +8,7 @@ import { HelloWorldComponent } from './hello-world/hello-world.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { TodoFormComponent } from './todo/todo-form/todo-form.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { TodoFormComponent } from './todo/todo-form/todo-form.component';
     HelloWorldComponent,
     TodoComponent,
     TodoListComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">Todo Form</div>
+  <div class="card-body">
+
+    <div>
+      <label for="title" class="form-label">Title</label>
+      <input [(ngModel)]="todo.title" type="text" name="title" id="title" class="form-control">
+    </div>
+
+    <div>
+      <label for="name" class="form-label">Name</label>
+      <input [(ngModel)]="todo.name" type="text" name="name" id="name" class="form-control">
+    </div>
+
+    <div>
+      <label for="title" class="form-label">Date</label>
+      <input [(ngModel)]="todo.date" type="date" name="date" id="date" class="form-control">
+    </div>
+
+    <br>
+
+    <div>
+      <button (click)="onSaveTodo()" class="btn btn-primary">
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">Todo List</div>
+  <div class="card-body">
+    <ul>
+      <li *ngFor="let todo of todoList" class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{todo.title}}</div>
+          {{todo.name}}
+        </div>
+        <span class="badge bg-primary rounded-pill">{{todo.date}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

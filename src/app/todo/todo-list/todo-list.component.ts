@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
+import { TodoService } from 'src/app/services/todo.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,30 +11,42 @@ import { environment } from 'src/environments/environment';
 })
 export class TodoListComponent implements OnInit {
 
-  @Input() todoList: Todo[]
-  @Output() onDeleted: EventEmitter<any> = new EventEmitter()
+  // @Input() todoList: Todo[]
+  // @Output() onDeleted: EventEmitter<any> = new EventEmitter()
 
-  constructor(private http: HttpClient) {
+  todoList: Todo[]
+
+  isLoading: Boolean = false
+
+  constructor(private todoService: TodoService) {
     this.todoList = []
   }
 
   ngOnInit(): void {
+    this.getTodoList()
+  }
+
+  getTodoList() {
+    this.isLoading = true
+    this.todoService.getTodoList()
+      .then((datalist: any)=>{
+        this.todoList = datalist
+      })
+      .finally(()=>{
+        this.isLoading = false
+      })
   }
 
   onDelete(id: number) {
     if(!confirm("Are you sure?")) {
       return
     }
-    this.http.delete(environment.endpoint + "todo/"+id).subscribe(
-      (response: any) => {
-        if(response.status == '200') {
-          alert('Success')
-          this.onDeleted.emit(true)
-        } else {
-          alert('delete fail')
-        }
-      }
-    )
+    this.todoService.deleteTodo(id).then(()=>{
+      this.getTodoList()
+    })
+    .catch(()=>{
+      alert("Delete fail")
+    })
   }
 
 }

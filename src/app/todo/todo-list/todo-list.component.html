@@ -1,16 +1,19 @@
 <div class="card">
   <div class="card-header">Todo List</div>
   <div class="card-body">
-    <ul>
+    <div *ngIf="isLoading == false">
       <li *ngFor="let todo of todoList" class="list-group-item d-flex justify-content-between align-items-start">
         <div class="ms-2 me-auto">
           <div class="fw-bold">{{todo.title}}</div>
           {{todo.name}}
-          <br>
-          <button (click)="onDelete(todo.id)" class="btn btn-danger">Delete</button>
+          <hr>
+          <button [routerLink]="['/todo','form', todo.id]"  class="btn btn-info btn-sm me-2">Edit</button>
+          <button (click)="onDelete(todo.id)" class="btn btn-danger btn-sm">Delete</button>
         </div>
         <span class="badge bg-primary rounded-pill">{{todo.date}}</span>
       </li>
-    </ul>
+    </div>
+
+    <h3 *ngIf="isLoading == true">Loading</h3>
   </div>
 </div>

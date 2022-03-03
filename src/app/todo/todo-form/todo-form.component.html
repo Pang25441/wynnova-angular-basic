@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="!isLoading" class="card">
   <div class="card-header">Todo Form</div>
   <div class="card-body">
 
@@ -27,3 +27,6 @@
 
   </div>
 </div>
+
+
+<h3 *ngIf="isLoading">Loading</h3>

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Todo } from '../models/todo.model';
+import { TodoService } from '../services/todo.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,7 +18,7 @@ export class TodoComponent implements OnInit {
 
   todoList: Todo[]
 
-  constructor(private http: HttpClient, private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     // this.todoListDummy = [
     //   {title: 'AAAAAAAAAAAAAA', name: 'GGGG', date:'2022-03-03'},
     //   {title: 'BBBBBBBBBBBBBB', name: 'GGGG', date:'2022-03-03'},
@@ -35,27 +37,20 @@ export class TodoComponent implements OnInit {
       }
     )
 
-    this.getTodoList()
   }
 
-  getTodoList() {
-    this.http.get(environment.endpoint + "todo").subscribe(
-      (response: any) => {
-        if(response.status == '200') {
-          this.todoList = response.data
-        } else {
-          alert('Server fail')
-        }
-      }
-    )
-  }
 
   saveTodo(todoData: Todo) {
     this.todoList.push(todoData)
   }
 
   onTodoDeleted(event:any) {
-    this.getTodoList()
+    // this.getTodoList()
+  }
+
+  onLogout() {
+    this.userService.logout()
+    this.router.navigate(['/login'])
   }
 
 }

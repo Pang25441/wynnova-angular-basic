@@ -1,11 +1,11 @@
 <div *ngIf="isLoggedIn == true" class="row">
   <div class="col-md-6 offset-md-3">
 
-    <h3>Todo Application</h3>
+    <h3>Todo Application <button (click)="onLogout()" class="btn btn-danger">Logout</button></h3>
 
-    <!-- <router-outlet></router-outlet> -->
-    <app-todo-form (onSave)="saveTodo($event)"></app-todo-form>
-    <app-todo-list [todoList]="todoList" (onDeleted)="onTodoDeleted($event)"></app-todo-list>
+    <router-outlet></router-outlet>
+    <!-- <app-todo-form (onSave)="saveTodo($event)"></app-todo-form>
+    <app-todo-list [todoList]="todoList" (onDeleted)="onTodoDeleted($event)"></app-todo-list> -->
 
   </div>
 </div>

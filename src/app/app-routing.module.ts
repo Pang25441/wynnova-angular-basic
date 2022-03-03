@@ -11,8 +11,10 @@ const routes: Routes = [
   {path: '', component: HelloWorldComponent},
   {path: 'login', component: LoginFormComponent},
   {path: 'todo', component: TodoComponent, canActivate: [LoginGuard], children: [
+    {path: '', component: TodoListComponent},
     {path: 'list', component: TodoListComponent},
-    {path: 'form', component:TodoFormComponent}
+    {path: 'form', component:TodoFormComponent},
+    {path: 'form/:tid', component:TodoFormComponent},
   ]}
 ];
 
